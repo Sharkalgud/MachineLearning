@@ -1,5 +1,5 @@
 function submitWithConfiguration(conf)
-% note: has "certificate" mod for linux-like systems
+% Note: has the "certificate" patch from Liran for Windows-like systems
   addpath('./lib/jsonlab');
 %keyboard
   parts = parts(conf);
@@ -65,7 +65,7 @@ function response = submitParts(conf, email, token, parts)
   submissionUrl = submissionUrl();
   params = {'jsonBody', body};
   %responseBody = urlread(submissionUrl, 'post', params);
-  [code, responseBody] = system(sprintf('echo ''jsonBody=%s'' | curl -k -X POST -d @- %s', body, submissionUrl));
+  [code, responseBody] = system(sprintf('echo jsonBody=%s | curl -k -X POST -d @- %s', body, submissionUrl));
   response = loadjson(responseBody);
 end
 
